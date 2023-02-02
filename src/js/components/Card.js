@@ -3,8 +3,12 @@ export class Card {
     constructor (properties) {
         this.rank = properties.rank
         this.suit = properties.suit
+        // specifing index property, so we can use dropCard
+        this.index = properties.index
         this.element = document.createElement('div')
         this.faceDown = false;
+
+        this.handleClick = properties.handleClick
         this.refreshElement()
     }
 
@@ -25,8 +29,12 @@ export class Card {
             this.element.classList.remove("face-down");
         }
         // adding event listener for fliping card 
-        this.element.addEventListener("mouseenter", this.flipCard);
-        this.element.addEventListener("mouseleave", this.flipCard);
+        // for dropCard this has to be commented out
+        // this.element.addEventListener("mouseenter", this.flipCard);
+        // this.element.addEventListener("mouseleave", this.flipCard);
+        this.element.addEventListener("click", () => {
+            this.handleClick(this.index)
+        });
     }
 
     // Increasing rank
@@ -38,8 +46,10 @@ export class Card {
 
     // fliping card - only changes the status of facedown and the calls
     // refreshelement on the element and rebuilds it again with new value
-    flipCard = () => {
-        this.faceDown = !this.faceDown
-        this.refreshElement();
-    }
+
+    // for dropCard this has to be commented out
+    // flipCard = () => {
+    //     this.faceDown = !this.faceDown
+    //     this.refreshElement();
+    // }
     }

@@ -18,7 +18,10 @@ export class Hand {
         this.element.innerHTML = `<button class="button">Drop First</button>`
         this.element.classList.add("cards-container");
         //looping throug carddata
-        this.cardData.forEach((cardData) => {
+        this.cardData.forEach((cardData, index) => {
+        // assigning the index to cardData.index
+        cardData.index = index;
+        cardData.handleClick = this.dropCard;
         const card =  new Card(cardData);
         this.element.appendChild(card.element)
     })
@@ -31,5 +34,10 @@ export class Hand {
         this.cardData.shift();
         this.refreshElement();
 
+    }
+    // method for droping the card we click on
+    dropCard = (index) => {
+        this.cardData.splice(index, 1)
+        this.refreshElement();
     }
 }
